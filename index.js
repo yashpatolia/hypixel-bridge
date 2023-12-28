@@ -45,5 +45,3 @@ bot.on('end', () => {
 	});
 	setTimeout(() => bot.connect(options.host), 5000);
 });
-
-// https://discord.com/api/webhooks/1047392420008050720/02w8BwpX6-pgbQ54WaikjMbN_SZfxBzGUzzuhGb8To5kocN3hZNa2MqymGun0oOYW14F
