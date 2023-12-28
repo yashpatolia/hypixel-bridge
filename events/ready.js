@@ -24,10 +24,18 @@ module.exports = {
 
 		bot.on('chat', (username, message) => {
 			console.log(`${username}: ${message}`);
+
 			if (username === 'Guild' && message.split(' ')[0] !== options.username) {
 				// Guild Message
-				if (['joined.', 'left.'].includes(message.split(' ')[-1])) {
-					console.log(`[MC] ${username} ${message}`);
+				if (!['joined.', 'left.'].includes(message.split(' ').slice(-1)[0])) {
+					const regex = /^(?:\[(?<rank>.+?)\])?\s?(?<player>.+?)\s?(?:\[(?<guildRank>.+?)\])?: (?<message>.*)$/;
+					const data = message.match(regex);
+
+					webhookClient.send({
+						content: data.groups.message,
+						username: data.groups.player,
+						avatarURL: `https://mc-heads.net/avatar/${data.groups.player}`,
+					});
 				}
 				// Member Joined / Left
 				else {
