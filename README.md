@@ -17,7 +17,6 @@ Before running the bot, ensure you have the following installed:
 
    ```bash
    git clone https://github.com/yashpatolia/hypixel-bridge.git
-   cd hypixel-bridge
    ```
 
 2. **Edit `config.json` file**
