@@ -63,6 +63,28 @@ module.exports = {
 					embeds: [embed],
 				});
 			}
+
+			if (message.includes('joined the guild!')) {
+				const embed = new EmbedBuilder()
+					.setColor(0xB2FBA5)
+					.setDescription(`${message}`);
+
+				webhookClient.send({
+					username: 'Bridge',
+					embeds: [embed],
+				});
+			}
+
+			if (message.includes('left the guild!')) {
+				const embed = new EmbedBuilder()
+					.setColor(0xFF6961)
+					.setDescription(`${message}`);
+
+				webhookClient.send({
+					username: 'Bridge',
+					embeds: [embed],
+				});
+			}
 		});
 	},
 };
