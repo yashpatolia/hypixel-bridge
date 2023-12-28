@@ -1,7 +1,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const mineflayer = require('mineflayer');
-const { Client, GatewayIntentBits, WebhookClient } = require('discord.js');
+const { Client, GatewayIntentBits, WebhookClient, EmbedBuilder } = require('discord.js');
 const { token, options, webhookID, webhookToken } = require('./config.json');
 
 const client = new Client({
@@ -32,5 +32,18 @@ for (const file of eventFiles) {
 }
 
 client.login(token);
+
+bot.on('end', () => {
+	console.log('[Disconnected] Reconnecting in 5 seconds.');
+	const embed = new EmbedBuilder()
+		.setColor(0xFF964F)
+		.setDescription(`**[Disconnected] Restarting ${options.username}**`);
+
+	webhookClient.send({
+		username: 'Bridge',
+		embeds: [embed],
+	});
+	setTimeout(() => bot.connect(options.host), 5000);
+});
 
 // https://discord.com/api/webhooks/1047392420008050720/02w8BwpX6-pgbQ54WaikjMbN_SZfxBzGUzzuhGb8To5kocN3hZNa2MqymGun0oOYW14F
