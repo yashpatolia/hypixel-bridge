@@ -1,10 +1,19 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const mineflayer = require('mineflayer');
 const { Client, GatewayIntentBits, WebhookClient } = require('discord.js');
-const { token, webhookID, webhookToken } = require('./config.json');
+const { token, options, webhookID, webhookToken } = require('./config.json');
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-let bot = undefined;
+const client = new Client({
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMembers,
+	],
+});
+
+const bot = mineflayer.createBot(options);
 const webhookClient = new WebhookClient({ id: webhookID, token: webhookToken });
 module.exports = { bot, webhookClient };
 
@@ -16,7 +25,8 @@ for (const file of eventFiles) {
 	const event = require(filePath);
 	if (event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
-	} else {
+	}
+	else {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
