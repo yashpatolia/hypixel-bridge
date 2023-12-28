@@ -1,0 +1,12 @@
+{
+    "token": "discord-bot-token",
+    "webhookID": "webhook-id",
+    "webhookToken": "webhook-token",
+    "bridgeChannel": "bridge-channel-id",
+    "options": {
+        "host": "mc.hypixel.net",
+        "username": "minecraft-username",
+        "auth": "microsoft",
+        "version": "1.8.9"
+    }
+}
